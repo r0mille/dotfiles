@@ -1,0 +1,12 @@
+[user]
+    name = r0mille
+    email = ke4mtg+r0mille@gmail.com
+[alias]
+    co=checkout
+    save=stash save "WIP - save"
+    pop=stash pop
+    s=status
+    d=diff
+    p=pull
+[core]
+    excludesfile = /Users/bobbymiller/.gitignore
