@@ -156,3 +156,4 @@ let g:ctags_title=1
 let g:php_localvarcheck_enable=1
 
 let g:python_highlight_all = 1
+nmap <leader>bl :'<,'>s/,/,\r/g
