@@ -140,6 +140,8 @@ let g:tagbar_type_php  = {
     \ 'j:javascript functions:1'
   \ ]
 \ }
+
+"" http://www.held.org.il/blog/2011/02/configuring-ctags-for-python-and-vim/
 set tags=~/.vim/mytags/tags
 set laststatus=2
 
