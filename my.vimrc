@@ -140,6 +140,8 @@ let g:tagbar_type_php  = {
     \ 'j:javascript functions:1'
   \ ]
 \ }
+
+"" http://www.held.org.il/blog/2011/02/configuring-ctags-for-python-and-vim/
 set tags=~/.vim/mytags/tags
 set laststatus=2
 
@@ -156,4 +158,9 @@ let g:ctags_title=1
 let g:php_localvarcheck_enable=1
 
 let g:python_highlight_all = 1
-nmap <leader>bl :'<,'>s/,/,\r/g
+nmap <leader>bl :'<,'>s/,/,\r/g<cr>
+
+"" In any directory you can define .vim.custom to override vim settings
+if filereadable(".vim.custom")
+    so .vim.custom
+endif
