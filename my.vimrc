@@ -127,6 +127,10 @@ let g:NERDTreeWinSize = 40
 let NERDTreeIgnore = ['\.pyc$']
 au BufRead,BufNewFile *.module,*.inc,*.info set filetype=php
 
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeNodeDelimiter = "\u00a0"
+
 "" Tagbar !
 nmap <leader>t :TagbarOpen fj<cr>
 let g:tagbar_left=1
