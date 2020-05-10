@@ -18,6 +18,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-python/python-syntax'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'adarsh/electric_boogaloo.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -162,7 +163,7 @@ let g:ctags_title=1
 let g:php_localvarcheck_enable=1
 
 let g:python_highlight_all = 1
-nmap <leader>bl :'<,'>s/,/,\r/g<cr>
+nmap <leader>bl :Breakin ,<cr>
 
 "" In any directory you can define .vim.custom to override vim settings
 if filereadable(".vim.custom")
