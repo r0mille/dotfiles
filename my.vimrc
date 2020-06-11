@@ -10,11 +10,12 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+"
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'prettier/vim-prettier'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-python/python-syntax'
 Plugin 'editorconfig/editorconfig-vim'
@@ -34,9 +35,6 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-
-"Start Pathogen
-execute pathogen#infect()
 
 let mapleader = ","
 
@@ -92,15 +90,15 @@ set smartcase                   " ... unless they contain at least one
 set autoindent              " always set autoindenting on
 set matchpairs+=<:>         " show matching <> (html mainly) as well
 
-"" call pathogen#infect()
 set hidden                  " allow switching buffers without saving
 
 "" Ctrl+C after a visual selection copies to system clipboard
 map <C-c> "+y<CR>
 
 if has('gui_running')
-  colorscheme solarized8
-  set background=light
+""  colorscheme solarized8
+  colorscheme ron
+  set background=dark
   set guifont=Monaco:h14
 else
   colorscheme ron
@@ -169,3 +167,6 @@ nmap <leader>bl :Breakin ,<cr>
 if filereadable(".vim.custom")
     so .vim.custom
 endif
+
+nmap <leader>p :Prettier<cr>
+nmap <leader>vi :tabe ~/.vimrc<cr>
