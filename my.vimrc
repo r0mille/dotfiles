@@ -22,7 +22,7 @@ set termguicolors
 set scrolloff=8
 
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -36,28 +36,25 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
+"" Intellisense
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tweekmonster/gofmt.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+"" Git
 Plug 'tpope/vim-fugitive'
+
+"" Others
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'prettier/vim-prettier'
 Plug 'adarsh/electric_boogaloo.vim'
 Plug 'tpope/vim-sensible'
-Plug 'lifepillar/vim-solarized8'
 Plug 'scrooloose/nerdtree'
 
-"  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
-"  TOOOOOOOOOOOOO
+"" Colorscheme stuff
 Plug 'gruvbox-community/gruvbox'
-""Plug 'sainnhe/gruvbox-material'
-""Plug 'phanviet/vim-monokai-pro'
-""Plug 'vim-airline/vim-airline'
-""Plug 'flazz/vim-colorschemes'
-""Plug '/home/mpaulson/personal/vim-be-good'
 
 call plug#end()
 
@@ -100,7 +97,8 @@ set splitright
 
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <Leader>ps :Rg<SPACE>
+nnoremap <Leader>pg :Rg<SPACE>
+nnoremap <Leader>ph :Rg<SPACE><C-r><C-w><CR>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <Leader>pf :Files<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
