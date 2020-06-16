@@ -1,48 +1,94 @@
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+syntax on
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+set guicursor=
+set noshowmatch
+set relativenumber
+set nohlsearch
+set hidden
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set nu
+set nowrap
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+set termguicolors
+set scrolloff=8
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"
-Plugin 'tpope/vim-fugitive'
-Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'prettier/vim-prettier'
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-python/python-syntax'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'adarsh/electric_boogaloo.vim'
+" Give more space for displaying messages.
+set cmdheight=2
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=50
 
-let mapleader = ","
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
 
-"Seriously, guys. It's not like :W is bound to anything anyway.                                                                                        
-command! W :w
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
-" for when we forget to use sudo to open/edit a file
-cmap w!! w !sudo tee % >/dev/null
+call plug#begin('~/.vim/plugged')
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tweekmonster/gofmt.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-utils/vim-man'
+Plug 'mbbill/undotree'
+Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'prettier/vim-prettier'
+Plug 'adarsh/electric_boogaloo.vim'
+Plug 'tpope/vim-sensible'
+Plug 'lifepillar/vim-solarized8'
+Plug 'scrooloose/nerdtree'
+
+"  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
+"  TOOOOOOOOOOOOO
+Plug 'gruvbox-community/gruvbox'
+""Plug 'sainnhe/gruvbox-material'
+""Plug 'phanviet/vim-monokai-pro'
+""Plug 'vim-airline/vim-airline'
+""Plug 'flazz/vim-colorschemes'
+""Plug '/home/mpaulson/personal/vim-be-good'
+
+call plug#end()
+
+
+"" ColorScheme stuffz 
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+colorscheme gruvbox
+set background=dark
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark = 'hard'
+
+if executable('rg')
+    let g:rg_derive_root='true'
+endif
+
+let mapleader = " "
+let loaded_matchparen = 1
+
+let g:netrw_browse_split = 2
+let g:vrfr_rg = 'true'
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
 
 " ctrl-jklm  changes to that split
 map <c-j> <c-w>j
@@ -52,115 +98,29 @@ map <c-h> <c-w>h
 set splitbelow
 set splitright
 
-" ==========================================================
-" Basic Settings 
-" ==========================================================
-syntax on                     " syntax highlighing
-set numberwidth=1             " using only 1 column (and 1 space) while
-set title                     " show title in console title bar
-set wildmenu                  " Menu completion in command mode on <Tab>
-set wildmode=full             " <Tab> cycles between all matching choices.
-set autochdir
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <Leader>ps :Rg<SPACE>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <Leader>pf :Files<CR>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
-" Ignore these files when completing
-set wildignore+=*.o,*.obj,.git,*.pyc 
-
-""" Moving Around/Editing
-set cursorline              " have a line indicate the cursor location
-set ruler                   " show the cursor position all the time
-set nostartofline           " Avoid moving cursor to BOL when jumping around
-
-set nocompatible                " choose no compatibility with legacy vi
-syntax enable
-set encoding=utf-8
-set showcmd                     " display incomplete commands
-
-"" Whitespace
-set nowrap                      " don't wrap lines
-set tabstop=4 shiftwidth=4      " a tab is two spaces (or set this to 2)
-set expandtab                   " use spaces, not tabs (optional)
-set backspace=indent,eol,start  " backspace through everything in insert
-
-"" Searching
-set hlsearch                    " highlight matches
-set incsearch                   " incremental searching
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one
-
-set autoindent              " always set autoindenting on
-set matchpairs+=<:>         " show matching <> (html mainly) as well
-
-set hidden                  " allow switching buffers without saving
-
-"" Ctrl+C after a visual selection copies to system clipboard
-map <C-c> "+y<CR>
-
-if has('gui_running')
-""  colorscheme solarized8
-  colorscheme ron
-  set background=dark
-  set guifont=Monaco:h14
-else
-  colorscheme ron
-  set background=dark
-endif
-
-"" CTRL P
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-"" let g:ctrlp_cmd = 'CtrlPMRU'
-nmap <leader>P :CtrlPBufTagAll<cr>
-nmap <leader>G :CtrlPTag<cr>
-let g:ctrlp_lazy_update = 1
-let g:ctrlp_tabpage_position = 'al'
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-let g:ctrlp_max_files=0
-set wildignore+=*/node_modules/*,*/.git/*,*.swp
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.+(git|hg|svn|node_modules)$',
-  \ }
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
+""" NerdTree
 nmap <leader>n :NERDTree<cr>
 nmap <leader>m :NERDTree %<cr>
 let g:NERDTreeWinSize = 40
 let NERDTreeIgnore = ['\.pyc$']
-au BufRead,BufNewFile *.module,*.inc,*.info set filetype=php
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeNodeDelimiter = "\u00a0"
 
-"" Tagbar !
-nmap <leader>t :TagbarOpen fj<cr>
-let g:tagbar_left=1
-let g:tagbar_type_php  = {
-  \ 'ctagstype' : 'php',
-  \ 'kinds'     : [
-    \ 'i:interfaces',
-    \ 'c:classes',
-    \ 'd:constant definitions',
-    \ 'f:functions',
-    \ 'j:javascript functions:1'
-  \ ]
-\ }
+"Seriously, guys. It's not like :W is bound to anything anyway.                                                                                        
+command! W :w
 
-"" http://www.held.org.il/blog/2011/02/configuring-ctags-for-python-and-vim/
-set tags=~/.vim/mytags/tags
-set laststatus=2
+" for when we forget to use sudo to open/edit a file
+cmap w!! w !sudo tee % >/dev/null
 
-nmap <leader>a :Ack 
-
-"" From http://stackoverflow.com/questions/7163947/vim-paste-multiple-times
-xnoremap p pgvy
-
-"" Function status line
-let g:ctags_path="/usr/bin/ctags"
-let g:ctags_statusline=1
-let g:ctags_title=1
-
-let g:php_localvarcheck_enable=1
-
-let g:python_highlight_all = 1
 nmap <leader>bl :Breakin ,<cr>
 
 "" In any directory you can define .vim.custom to override vim settings
@@ -170,3 +130,42 @@ endif
 
 nmap <leader>p :Prettier<cr>
 nmap <leader>vi :tabe ~/.vimrc<cr>
+
+" GoTo code navigation.
+" " Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rr <Plug>(coc-rename)
