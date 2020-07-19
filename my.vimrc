@@ -19,7 +19,7 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set termguicolors
-set scrolloff=8
+set scrolloff=0
 
 " Give more space for displaying messages.
 set cmdheight=1
@@ -52,6 +52,7 @@ Plug 'prettier/vim-prettier'
 Plug 'adarsh/electric_boogaloo.vim'
 Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdtree'
+Plug 'ap/vim-css-color'
 
 "" Colorscheme stuff
 Plug 'gruvbox-community/gruvbox'
