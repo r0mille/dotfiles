@@ -6,7 +6,8 @@ set relativenumber
 set nohlsearch
 set hidden
 set noerrorbells
-set tabstop=4 softtabstop=4
+"set tabstop=4 softtabstop=4
+set tabstop=2 shiftwidth=2
 set shiftwidth=4
 set expandtab
 set smartindent
@@ -36,8 +37,22 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
-"" Intellisense
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+"" CocExtensions as of 7/23/20
+"" ==============================
+"" * coc-explorer 0.7.11
+"" * coc-tsserver 1.5.1
+"" * coc-prettier 1.1.14
+"" * coc-flow 0.1.3
+"" * coc-explorer 0.7.11
+"" * coc-eslint 1.2.7
+"" + coc-python 1.2.12
+"" + coc-json 1.2.6
+"" + coc-css 1.2.3
+
+
+"" Intellisense
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -53,6 +68,9 @@ Plug 'adarsh/electric_boogaloo.vim'
 Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdtree'
 Plug 'ap/vim-css-color'
+
+Plug 'flowtype/vim-flow'
+Plug 'editorconfig/editorconfig-vim'
 
 "" Colorscheme stuff
 Plug 'gruvbox-community/gruvbox'
@@ -127,6 +145,7 @@ if filereadable(".vim.custom")
     so .vim.custom
 endif
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nmap <leader>p :Prettier<cr>
 nmap <leader>vi :tabe ~/.vimrc<cr>
 
@@ -168,3 +187,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rr <Plug>(coc-rename)
+
+" Run ESLint
+nmap <silent> es <Plug>(coc-codeaction)
+
