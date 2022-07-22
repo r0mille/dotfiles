@@ -8,7 +8,7 @@ set hidden
 set noerrorbells
 "set tabstop=4 softtabstop=4
 set tabstop=2 shiftwidth=2
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
 set smartindent
 set nu
@@ -68,6 +68,7 @@ Plug 'adarsh/electric_boogaloo.vim'
 Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdtree'
 Plug 'ap/vim-css-color'
+Plug 'majutsushi/tagbar'
 
 Plug 'flowtype/vim-flow'
 Plug 'editorconfig/editorconfig-vim'
@@ -145,7 +146,7 @@ if filereadable(".vim.custom")
     so .vim.custom
 endif
 
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
+""command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nmap <leader>p :Prettier<cr>
 nmap <leader>vi :tabe ~/.vimrc<cr>
 
@@ -191,3 +192,6 @@ nmap <leader>rr <Plug>(coc-rename)
 " Run ESLint
 nmap <silent> es <Plug>(coc-codeaction)
 
+" tagbar
+nmap <leader>t :TagbarToggle<CR>
+let g:tagbar_ctags_options = ['NONE', '--map-javascript=.jsx']
