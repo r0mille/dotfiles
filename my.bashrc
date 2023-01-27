@@ -16,12 +16,14 @@ alias bgrep='git branch -a | grep '
 
 # VIM SHITS
 source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette_osx.sh"
-alias vi='/usr/local/bin/nvim'
-alias vim='/usr/local/bin/nvim'
+alias vi='/opt/homebrew/bin/nvim'
+alias vim='/opt/homebrew/bin/nvim'
 
 # Current Project Home
-alias gh="cd ~/dev/nftplay/hotdog-nft"
-alias gd="cd ~/dev/web3/dappns-zee-bridge"
-alias gb="cd ~/dev/bubblegoods/bubble"
+#alias gh="cd ~/dev/nftplay/hotdog-nft"
+alias gd="cd ~/dev/dappns-zee-bridge"
+alias gon="cd ~/dev/onsight-jobs"
+#alias gb="cd ~/dev/bubblegoods/bubble"
+alias gt="cd ~/dev/tripgrid-web"
 
 alias syncdotvi='cp ~/.vimrc ~/dev/dotfiles/my.vimrc'
